@@ -222,3 +222,190 @@ class Solution {
 }
 
 
+
+
+/*Write a program to check given number is EVEN or ODD? */
+public class CheckEVEN_ODD{
+	public static boolean Check(int num){
+		if(num%2==0)return true;
+		return false;
+	}
+	public static void main(String[] args){
+		System.out.println(Check(22)?"the number is even":"the number is odd");
+	}
+}
+
+/* Write a program to display PRIME NUMBERS from 1 to n? */
+public class print_prime{
+    public static boolean prime(int n){
+		if(n<=1)return false;
+		if(n==2)return true;
+		if (n % 2 == 0) {
+        return false;
+        }
+		for(int i=3;i<=Math.sqrt(n);i +=2){
+			if(n%i==0 )
+			return false;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args){
+		for (int i =0 ; i<=50;i++){
+		    if(prime(i))System.out.println("no is = "+ i);
+		} 
+	}
+}
+
+
+/* Write a program to check whether the given number is PRIME or not? */
+import java.util.Scanner;
+public class isprime{
+    public static boolean prime(int n){
+		if(n<=1)return false;
+		if(n==2)return true;
+		if (n % 2 == 0) {
+        return false;
+        }
+		for(int i=3;i<=Math.sqrt(n);i +=2){
+			if(n%i==0 )
+			return false;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args){
+		Scanner sc=new Scanner(System.in);
+		int num=sc.nextInt();
+		System.out.println(prime(num)?num+" is prime":num + " is not prime");
+	}
+}
+
+/* Write a program to find SUM OF PRIME numbers?*/
+
+public class print_prime{
+    public static boolean prime(int n){
+		if(n<=1)return false;
+		if(n==2)return true;
+		if (n % 2 == 0) {
+        return false;
+        }
+		for(int i=3;i<=Math.sqrt(n);i +=2){
+			if(n%i==0 )
+			return false;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args){
+		int sum=0;
+		for (int i =0 ; i<=50;i++){
+		    if(prime(i))sum=sum+i;
+		} 
+		System.out.println("sum is = "+sum);
+	}
+}
+
+/*Write program weather the number is PERFECT NUMBER or not? Def: Perfect number, a positive integer that 
+is equal to the sum of its proper divisors. The smallest perfect number is 6, which is the sum of 1, 2, and 3. */
+
+public class Main{
+
+	public static boolean positive_integer(int n){
+	    int sum=0;
+		for(int i=1;i<=n/2;i++){
+			if(n%i==0)sum=sum+i;
+		}
+		if(sum==n)return true;
+		return false;
+		
+	}
+	public static void main(String[] args){
+		int num=10000;
+		for(int i=1;i<=num;i++){
+		    if (positive_integer(i)) System.out.println("no is = "+ i);
+		}
+		
+	}
+}
+
+/* Write a program to display RANGE of PERFECT NUMBERS? */
+
+public class Main{
+
+	public static boolean positive_integer(int n){
+	    int sum=0;
+		for(int i=1;i<=n/2;i++){
+			if(n%i==0)sum=sum+i;
+		}
+		if(sum==n)return true;
+		return false;
+		
+	}
+	public static void main(String[] args){
+		int num=10000;
+		for(int i=1;i<=num;i++){
+		    if (positive_integer(i)) System.out.println("no is = "+ i);
+		}
+		
+	}
+}
+/* Write a program to check the given number is PALINDROME or not? */
+public class PALINDROME{
+
+	public static boolean palandrome(int n){
+	    int cpoy=n;
+	    int reverse=0;
+	    while(n!=0){
+	        int temp=n%10;
+	        reverse=reverse*10+temp;
+	        n=n/10;
+	    }
+		
+		if (cpoy==reverse)return true;
+		return false;
+	}
+	public static void main(String[] args){
+		System.out.print(palandrome(1235321)?"it is palandrome ": "it is not palandrome ");
+		
+	}
+}
+/* Write a program to find the FACTORIAL of a given number? */
+public class Main{
+
+	public static int factorial(int n){
+	    int ans=1;
+	    for (int i=n; i>=1;i--){
+	        ans=i*ans;
+	    } 
+	    return ans;
+	}
+	public static void main(String[] args){
+		System.out.print("the factorial of number is "+ factorial(5));
+		
+	}
+}
+/* Write a program to find the FACTORIAL of a given RANGE of numbers?*/
+import java.util.Scanner;
+public class Main{
+
+	public static int factorial(int n){
+	    int ans=1;
+	    for (int i=n; i>=1;i--){
+	        ans=i*ans;
+	    } 
+	    return ans;
+	}
+	public static void main(String[] args){
+	    Scanner sc=new Scanner(System.in);
+	    System.out.println("enter start no :");
+	    int start=sc.nextInt();
+	    System.out.println("enter end no :");
+	    int end=sc.nextInt();
+	    for (int i=5;i<=10 ;i++){
+	        System.out.println("the factorial of number is "+ factorial(i));
+	    } 
+		
+		
+	}
+}
