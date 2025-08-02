@@ -154,3 +154,71 @@ public class Main
 	    System.out.print("answer = "+ ChefandHerBags(st));
 	}
 }
+
+
+/*56. Merge Intervals leetcode*/
+
+
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        // int [][] res=new int[intervals.length-1][2];
+        // if(intervals.length ==1)return intervals;
+        // for(int i =0; i<intervals.length-1;i++){
+        //     if(intervals[i][1]>=intervals[i+1][0]){
+        //         res[i][0]=intervals[i][0];
+        //         res[i][1]=intervals[i+1][1];
+        //     }else{
+        //         res[i][0]=intervals[i+1][0];
+        //         res[i][1]=intervals[i+1][1];
+        //     }
+        // }
+        // return res; //written by me but not efficient
+        if(intervals.length ==1)return intervals;
+        Arrays.sort(intervals,Comparator.comparingInt(i->i[0]));
+        List<int[]> result=new ArrayList<>();
+        int[] newInterval=intervals[0];
+        result.add(newInterval);
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] <= newInterval[1]) {
+                newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            } else {
+                newInterval = intervals[i];
+                result.add(newInterval);
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+    }
+}
+
+
+/* leetcode 771. Jewels and Stones */
+
+
+
+
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        // char [] jwl=jewels.toCharArray();
+        // char [] stn=stones.toCharArray();
+        // int count=0;
+        // for(int i=0;i<stn.length;i++){
+        //     for(int j=0;j<jwl.length;j++){
+        //         if(jwl[j]==stn[i])count++;
+        //     }
+        // }
+        // return count;//this is bruteforce and works fine 
+
+        Set<Character> set=new HashSet<>();
+        int count =0;
+        for(int i=0;i<jewels.length();i++){
+            set.add(jewels.charAt(i));
+        } 
+        for(int i=0;i<stones.length();i++ ){
+            if(set.contains(stones.charAt(i)))count++;
+        }
+        return count; 
+    }
+}
+
+
