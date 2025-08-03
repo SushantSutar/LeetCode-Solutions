@@ -523,3 +523,167 @@ class Solution {
 }
 
 
+
+// leetcode - 242. Valid Anagram
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        char[] ch1=s.toCharArray();char[] ch2=t.toCharArray();
+        Arrays.sort(ch1);Arrays.sort(ch2);
+        s=new String(ch1);t=new String(ch2);
+        if(s.equals(t))return true;
+        return false;
+    }
+}
+
+
+
+
+//  Write program to check the given number is STRONG or not? Def: Strong numbers are the numbers whose 
+// sum of factorial of digits is equal to the original number. Example: 145 is a strong number. 
+
+/*Examples of Strong Numbers:
+1: 1! = 1
+2: 2! = 2
+145: 1! + 4! + 5! = 1 + 24 + 120 = 145
+40585: 4! + 0! + 5! + 8! + 5! = 24 + 1 + 120 + 40320 + 120 = 40585
+*/
+public class Main{
+
+	public static int factorial(int n){
+	    int ans=1;
+	    for (int i=n; i>=1;i--){
+	        ans=i*ans;
+	    } 
+	    return ans;
+	}
+	public static void main(String[] args){
+		int n=40585; int res=0;int copy=n;
+		while(n!=0){
+			int temp=n%10;
+			res= factorial(temp) + res;
+			n=n/10;
+		}
+		if(res==copy)System.out.print("true");
+		else{System.out.print("false");
+		}
+	}
+}
+
+// Write program weather to find range of STRONG NUMBER? 
+
+public class Main{
+
+	public static int factorial(int n){
+	    int ans=1;
+	    for (int i=n; i>=1;i--){
+	        ans=i*ans;
+	    } 
+	    return ans;
+	}
+	public static void StrongNumber(int start,int end ){
+		
+		for(int i=start;i<=end;i++){
+			int res=0;int copy=i;
+			while(copy!=0){
+			int temp=copy%10;
+			res= factorial(temp) + res;
+			copy=copy/10;
+			}
+			if(res==i)System.out.println(i);
+		}
+		
+	}
+	public static void main(String[] args){
+		StrongNumber(1,1000000);
+		
+	}
+}
+
+
+
+// Write a program to display FIBONACCI series of a number? 
+public class Main{
+
+	public static void FIBONACCI(int n){
+		System.out.println("0 ");
+		System.out.println("1 ");int a=0;int b=1;
+		for(int i=1;i<=n;i++){
+			
+			int c=a+b;
+			System.out.print(c+ " ");
+			a=b;b=c;
+
+		}
+	}
+	
+	public static void main(String[] args){
+		FIBONACCI(15);		
+	}
+}
+
+// Write a program to display range of FIBONACCI numbers? 
+public class Main{
+
+	public static void FIBONACCI(int start,int end){
+		int a=0;int b=1;
+		for(int i=start;i<=end;i++){			
+			int c=a+b;
+		            if (c >= start && c<= end) {
+		                System.out.print(c+" ");
+		            }
+			a=b;b=c;
+		}
+	}
+	
+	public static void main(String[] args){
+		FIBONACCI(5,100);
+		
+	}
+}
+
+
+
+
+// Write a program to REVERSE the number? 
+public class Main{
+
+	public static void REVERSE(int num){
+		String s="";
+		while(num!=0){
+			int temp=num%10;
+			s=s+temp;
+			num=num/10;
+		}
+		int result=Integer.parseInt(s);
+		System.out.print(result);
+	}
+	
+	public static void main(String[] args){
+		
+		REVERSE(123);
+	}
+}
+
+
+
+// Write a program to display GCD of two numbers?
+
+public class Main {
+
+    public static int findGCD(int a, int b) {
+        while(b!=0){
+            int temp=b;
+            b=a%b;
+            a=temp;
+        }
+        return a;
+    }
+
+    public static void main(String[] args) {
+        int num1 = 48;
+        int num2 = 18;
+        System.out.println("The GCD of " + num1 + " and " + num2 + " is: " + findGCD(num1, num2));
+    }
+}
+
