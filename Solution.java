@@ -409,3 +409,117 @@ public class Main{
 		
 	}
 }
+
+
+// leetcode 48. Rotate Image 
+
+//my solution 
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        int [][]res=new int[matrix.length][matrix[0].length];
+        int k=0;
+        for(int i=matrix.length-1;i>=0;i--){
+            for(int j=0;j<matrix[i].length;j++){
+                res[j][matrix.length - 1 - i]=matrix[i][j];
+            }
+            k++;
+        }
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix.length;j++){
+                matrix[i][j]=res[i][j];
+            }
+        }
+        
+    }
+}
+
+// solution 2 by keetcode
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        int m = matrix.length;
+        //transpose
+        for(int i=0;i<m;i++){
+            for(int j=i;j<m;j++){
+                int temp=matrix[i][j];
+
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]= temp;
+            }
+        }
+        //reverse each row 
+        for(int i=0;i<m;i++){
+            int j=0,k=m-1;
+            while(j<k){
+                int temp= matrix[i][j];
+                matrix[i][j]= matrix[i][k];
+                matrix[i][k]= temp;
+                j++;
+                k--;
+            }
+        }
+
+    }
+}
+
+
+// leetcode 977. Squares of a Sorted Array
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            nums[i]=nums[i]*nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;
+    }
+}
+
+// leetcode 128. Longest Consecutive Sequence
+
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length==0)return 0;
+        Arrays.sort(nums);
+        int res=1;
+        int temp=1;
+        for(int i=1 ; i < nums.length; i++){
+            if(nums[i]== nums[i-1])continue;
+
+            if(nums[i-1]+1==nums[i]){
+                temp++;
+            }else {
+                temp=1;
+            }
+            res=Math.max(res,temp);
+        }
+        return res;
+    }
+}
+
+
+// leetcode 169. Majority Element
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        int key=0;int majority=0;
+        for(int i=0; i< nums.length;i++){
+            if(map.containsKey(nums[i])){
+                map.put(nums[i],map.get(nums[i])+1);
+            }else{
+                map.put(nums[i],1);
+            }
+            if(map.get(nums[i])> majority){
+                key=nums[i];
+                majority=map.get(nums[i]);
+            }
+        }
+        return key;
+
+    }
+}
+
+
