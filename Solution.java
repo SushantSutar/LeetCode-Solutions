@@ -687,3 +687,85 @@ public class Main {
     }
 }
 
+// leetcode 54. Spiral Matrix
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int colbegin=0;int colend=matrix[0].length-1;
+        int rowbegin=0;int rowend=matrix.length-1;
+        List<Integer> list=new ArrayList<>();
+
+        while(colbegin<=colend && rowbegin<=rowend){
+            //for forward
+            for(int i=colbegin;i<=colend;i++){
+                list.add(matrix[rowbegin][i]);
+            }rowbegin++;
+            // for downward
+            for(int i=rowbegin;i<=rowend;i++){
+                list.add(matrix[i][colend]);
+            }colend--;
+            //for backward
+            if(rowbegin<=rowend)
+            for(int i=colend;i>=colbegin;i--){
+                list.add(matrix[rowend][i]);
+            }rowend--;
+            if(colbegin<=colend)
+            // for upward
+            for(int i=rowend;i>=rowbegin;i--){
+                list.add(matrix[i][colbegin]);
+            }colbegin++;
+
+        }return list;
+    }
+}
+
+// leetcode 15 3Sum
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        if(nums == null || nums.length<3)return new ArrayList<>();
+        // lets first sort the array
+        Arrays.sort(nums);
+        Set<List<Integer>> set = new HashSet<>();
+        for(int i=0;i<nums.length-2;i++){
+            int left=i+1;
+            int right=nums.length-1;
+            while(left< right){
+                int sum=nums[i]+nums[left]+nums[right];
+                if(sum==0){
+                    set.add(Arrays.asList(nums[i],nums[left],nums[right]));
+                    left++;right--;
+                }else if(sum <0){
+                    left++;
+                }else{
+                    right--;
+                }
+            }
+            
+        }return new ArrayList<>(set);
+    }
+}
+
+
+
+// leetcode 228. Summary Ranges
+
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int temp = nums[i];
+            // int x = 0;
+
+            while (i+1 < nums.length && nums[i+1] - nums[i] == 1) {
+                
+                i++;
+            }
+
+            if (temp != nums[i]) 
+            list.add(temp + "->" + nums[i]);
+            else list.add(temp+"");
+        }
+
+        return list;
+    }
+}
