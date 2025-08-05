@@ -769,3 +769,173 @@ class Solution {
         return list;
     }
 }
+
+// leetcode 143. Reorder List
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public void reorderList(ListNode head) {
+        if (head == null || head.next == null) return;
+        // Deque<Integer> que=new ArrayDeque<>();
+        // ListNode temp=head;
+        // while(temp!=null){
+        //     que.add(temp.val);temp=temp.next;
+        // }
+        // temp=head;
+        // boolean fromFront = true;
+        // while (!que.isEmpty()) {
+        //     if (fromFront) {
+        //         temp.val = que.removeFirst();
+        //     } else {
+        //         temp.val = que.removeLast();
+        //     }
+        //     temp = temp.next;
+        //     fromFront = !fromFront;
+        // }// this was bruteforce works fine
+        // finding the mid of list
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast.next!=null && fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        //now reverse from the mid
+        ListNode mid=slow;
+        ListNode current=slow.next;
+        while(current.next!=null){
+            ListNode temp=current.next;
+            current.next=temp.next;
+            temp.next=mid.next;
+            mid.next=temp;
+        }
+
+        // now start from reordering 
+        slow = head;
+        fast=mid.next;
+        while(slow != mid){
+            mid.next=fast.next;
+            fast.next=slow.next;
+            slow.next=fast;
+            slow=fast.next;
+            fast=mid.next;
+        }
+    }
+}
+
+
+// leetcode 225. Implement Stack using Queues
+class MyStack {
+    public Queue<Integer> q;
+    public MyStack() {
+        q= new LinkedList<>();
+
+    }
+    
+    public void push(int x) {
+        q.add(x);
+        for(int i=0;i<q.size()-1;i++){
+            q.add(q.poll());
+        }
+    }
+    
+    public int pop() {
+        return q.poll();
+    }
+    
+    public int top() {
+        return q.peek();
+    }
+    
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
+
+
+// leetcode 19. Remove Nth Node From End of List
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next==null && n==1){
+            head=null;
+            return head;
+        }
+        
+        ListNode trav=head;int size=0;
+        while(trav!=null){
+            trav=trav.next;
+            size++;
+        }
+        if(n==size){
+            head=head.next;
+            return head;
+        }
+        trav=head;
+        for(int i=0;i<size-n-1;i++){
+            trav=trav.next;
+        }
+        trav.next=trav.next.next;
+        return head;
+    }
+}
+
+
+// leetcode 704. Binary Search
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int left=0;int right=nums.length-1;
+        
+        while(left <= right){
+            int mid=left+(right-left)/2;
+            if(nums[mid]==target)return mid;
+            if(nums[mid]<target){
+                left=mid+1;
+            }else {
+                right=mid-1;
+            }
+        }return -1;
+    }
+}
+
+
+// leetcode 35. Search Insert Position
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>=target)return i; 
+        }
+
+        return nums.length;
+    }
+}
+
