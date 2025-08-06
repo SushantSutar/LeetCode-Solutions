@@ -939,3 +939,229 @@ class Solution {
     }
 }
 
+
+
+// leetcode 13. Roman to Integer
+
+
+// class Solution {
+//     public int romanToInt(String s) {
+//         int sum=0;
+//         for(int i=0;i<s.length();i++){
+//             if(s.charAt(i) == 'I'){
+//                 sum=sum+1;
+//             }else if(s.charAt(i)=='V'){
+//                 sum=sum+5;
+//             }else if(s.charAt(i)=='X'){
+//                 sum=sum+10;
+//             }else if(s.charAt(i)=='L'){
+//                 sum=sum+50;
+//             }else if(s.charAt(i)=='C'){
+//                 sum=sum+100;
+//             }else if(s.charAt(i)=='D'){
+//                 sum=sum+500;
+//             }else if(s.charAt(i)=='M'){
+//                 sum=sum+1000;
+//             }
+//         }return sum; 
+//     }
+// }
+
+// class Solution {
+//     public int romanToInt(String s) {
+//         int sum = 0;
+//         for (int i = 0; i < s.length(); i++) {
+//             if (s.charAt(i) == 'I') {
+//                 if (i + 1 < s.length() && (s.charAt(i + 1) == 'V' || s.charAt(i + 1) == 'X')) {
+//                     sum -= 1;
+//                 } else {
+//                     sum += 1;
+//                 }
+//             } else if (s.charAt(i) == 'V') {
+//                 sum += 5;
+//             } else if (s.charAt(i) == 'X') {
+//                 if (i + 1 < s.length() && (s.charAt(i + 1) == 'L' || s.charAt(i + 1) == 'C')) {
+//                     sum -= 10;
+//                 } else {
+//                     sum += 10;
+//                 }
+//             } else if (s.charAt(i) == 'L') {
+//                 sum += 50;
+//             } else if (s.charAt(i) == 'C') {
+//                 if (i + 1 < s.length() && (s.charAt(i + 1) == 'D' || s.charAt(i + 1) == 'M')) {
+//                     sum -= 100;
+//                 } else {
+//                     sum += 100;
+//                 }
+//             } else if (s.charAt(i) == 'D') {
+//                 sum += 500;
+//             } else if (s.charAt(i) == 'M') {
+//                 sum += 1000;
+//             }
+//         }
+//         return sum;
+//     }
+// }
+
+
+
+class Solution {
+    public int romanToInt(String s) {
+        int sum = 0;
+        int n = s.length();
+        
+        for (int i = 0; i < n; i++) {
+            int value = getValue(s.charAt(i));
+            // If the next character represents a bigger number, subtract current
+            if (i < n - 1 && value < getValue(s.charAt(i + 1))) {
+                sum -= value;
+            } else {
+                sum += value;
+            }
+        }
+        return sum;
+    }
+    
+    private int getValue(char c) {
+        switch(c) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0; // Safety net
+        }
+    }
+}
+
+
+
+// leetcode 739. Daily Temperatures 
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int []res=new int[temperatures.length];
+
+        // for(int i=0;i<temperatures.length-1;i++){
+        //     int count=0;
+        //     for(int j=i+1;j<temperatures.length;j++){
+        //         if(temperatures[i]<temperatures[j]){
+        //             count++;break;
+        //         }else{
+        //             count++;
+        //             if(j==temperatures.length-1){
+        //                 count=0;
+        //             }
+        //             continue;
+        //         }
+        //     }
+        //     res[i]=count;
+        // }
+        // return res; // works but time limit exceded 
+
+        Stack<Integer> stack=new Stack<>();
+        for(int i=0;i<temperatures.length;i++){
+            while(!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]){
+                res[stack.peek()] = i- stack.pop();
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+}
+
+// leetcode 82. Remove Duplicates from Sorted List II
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode dummy=new ListNode(0);
+        dummy.next=head;
+        ListNode prev=dummy;ListNode curr=head;
+        while(curr!=null){
+            if(curr.next!=null && curr.val==curr.next.val){
+                // Skip all nodes with the same value
+                while(curr.next != null && curr.val==curr.next.val){
+                    curr=curr.next;
+                }
+                prev.next=curr.next;// Remove duplicates
+            }else{
+                prev=prev.next;// Move to next distinct node
+            }
+            curr=curr.next;
+        }
+        return dummy.next;
+    }
+}
+
+// leetcode 219. Contains Duplicate II
+
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(map.containsKey(nums[i])){
+                int diff=map.get(nums[i]);
+                if((i-diff)<=k){
+                    return true;
+                }else{
+                    map.put(nums[i],i);
+                }
+            }else{
+                map.put(nums[i],i);
+            }
+        }
+        return false;
+    }
+}
+
+
+// leetcode 509. Fibonacci Number
+
+class Solution {
+    public int fib(int n) {
+        int a=0;int b=1;
+        if(n==0)return a;
+        for(int i=2;i<=n;i++){
+            int temp=a+b;
+            a=b;
+            b=temp;
+        }
+        return b;
+    }
+}
+
+// leetcode 290. Word Pattern
+
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+        String[] ch=s.split(" ");boolean res=false;
+        HashMap<Character,String> map=new HashMap<>();
+
+        if (pattern.length() != ch.length) return false;
+
+        for(int i=0;i<pattern.length();i++){
+
+            if(map.containsKey(pattern.charAt(i))){
+
+                if( !map.get(pattern.charAt(i)). equals( ch[i] ) ) {
+                    return false;
+                }
+            }else{
+                if (map.containsValue(ch[i])) return false;
+                map.put(pattern.charAt(i),ch[i]);
+            }
+        }
+        return true;
+    }
+}
+
