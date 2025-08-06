@@ -1165,3 +1165,149 @@ class Solution {
     }
 }
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// BINARY to DECIMAL
+import java.util.Scanner;
+
+public class BinaryToDecimal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input binary number as a string
+        System.out.print("Enter a binary number: ");
+        String binary = scanner.nextLine();
+
+        try {
+            // Convert binary string to decimal using Integer.parseInt with radix 2
+            int decimal = Integer.parseInt(binary, 2);
+            System.out.println("Decimal equivalent: " + decimal);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid binary number.");
+        }
+
+        scanner.close();
+    }
+}
+
+
+
+// DECIMAL to BINARY
+import java.util.Scanner;
+
+public class DecimalToBinary {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input decimal number
+        System.out.print("Enter a decimal number: ");
+        int decimal = scanner.nextInt();
+
+        // Convert to binary using Integer.toBinaryString
+        String binary = Integer.toBinaryString(decimal);
+
+        System.out.println("Binary equivalent: " + binary);
+
+        scanner.close();
+    }
+}
+
+
+// OCTAL to DECIMAL
+import java.util.Scanner;
+
+public class OctalToDecimal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input octal number as a string
+        System.out.print("Enter an octal number: ");
+        String octal = scanner.nextLine();
+
+        try {
+            // Convert octal string to decimal using radix 8
+            int decimal = Integer.parseInt(octal, 8);
+            System.out.println("Decimal equivalent: " + decimal);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid octal number.");
+        }
+
+        scanner.close();
+    }
+}
+
+
+// DECIMAL to OCTAL
+import java.util.Scanner;
+
+public class DecimalToOctal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input decimal number
+        System.out.print("Enter a decimal number: ");
+        int decimal = scanner.nextInt();
+
+        // Convert to octal using Integer.toOctalString
+        String octal = Integer.toOctalString(decimal);
+
+        System.out.println("Octal equivalent: " + octal);
+
+        scanner.close();
+    }
+}
+
+
+// DECIMAL to HEXADECIMAL
+import java.util.Scanner;
+
+public class DecimalToHexadecimal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input decimal number
+        System.out.print("Enter a decimal number: ");
+        int decimal = scanner.nextInt();
+
+        // Convert to hexadecimal using Integer.toHexString
+        String hexadecimal = Integer.toHexString(decimal).toUpperCase();
+
+        System.out.println("Hexadecimal equivalent: " + hexadecimal);
+
+        scanner.close();
+    }
+}
+
+
+// DECIMAL to ALL(Octal , Hexa and Binary)
+import java.util.Scanner;
+
+public class DecimalToAll {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input decimal number
+        System.out.print("Enter a decimal number: ");
+        int decimal = scanner.nextInt();
+
+        // Convert to binary
+        String binary = Integer.toBinaryString(decimal);
+
+        // Convert to octal
+        String octal = Integer.toOctalString(decimal);
+
+        // Convert to hexadecimal
+        String hexadecimal = Integer.toHexString(decimal).toUpperCase();
+
+        // Display results
+        System.out.println("Binary equivalent     : " + binary);
+        System.out.println("Octal equivalent      : " + octal);
+        System.out.println("Hexadecimal equivalent: " + hexadecimal);
+
+        scanner.close();
+    }
+}
