@@ -1332,3 +1332,134 @@ publuc class equilateral{
     	}
 
 }
+
+
+
+
+// leetcode 367. Valid Perfect Square
+
+
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        double res=Math.sqrt(num);
+        
+        if(res % 1== 0){
+            return true;
+        }
+        return false;
+    }
+}
+
+
+
+// leetcode 74. Search a 2D Matrix
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int col=matrix[0].length -1;
+        for(int i=0; i< matrix.length; i++){
+
+            if(matrix[i][col] >= target){
+                for(int j=0; j<matrix[i].length; j++){
+                    if(matrix[i][j]== target)return true;
+                }
+            }else {
+                continue;
+            }
+            
+        }return false;
+
+    }
+}
+
+
+
+// leetcode 153. Find Minimum in Rotated Sorted Array
+
+class Solution {
+    public int findMin(int[] nums) {
+        int left=0;
+        int right=nums.length-1;
+        while(left<right){
+            int mid=(left+right)/2;
+            if(nums[mid] > nums[right]){
+                left=mid+1;
+            }else if(nums[mid] < nums[right]){
+                right=mid;
+            }
+        }
+
+        return nums[left];
+    }
+}
+
+
+
+// leetcode 33. Search in Rotated Sorted Array
+
+class Solution {
+    public int search(int[] nums, int target) {
+        // for(int i=0; i<nums.length;i++){
+        //     if(nums[i]==target)
+        //     return i;
+        // }
+        // return -1;
+        /////////////////////////////////////////////////////////
+        int left=0;
+        int right=nums.length-1;
+        while (left<=right) {
+            // int mid=left+(right-left)/2;
+            int mid = (left + right) / 2;
+            if (nums[mid]==target) {
+                return mid;
+            }
+            if (nums[left]<=nums[mid]) {
+                if (nums[left]<=target && target<nums[mid]) {
+                    right=mid-1;
+                }else{
+                    left=mid+1;
+                }
+            }else{
+                if (nums[mid]<target && target <=nums[right]) {
+                    left=mid+1;
+                }else{
+                    right=mid-1;
+                }
+            }
+        }
+        return -1;
+
+    }
+}
+
+
+
+// leetcode 875. Koko Eating Bananas
+
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int left = 1;
+        int right = 0;
+        for (int pile : piles) {
+            right = Math.max(right, pile);
+        }
+        
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (canEat(piles, h, mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+    
+    private boolean canEat(int[] piles, int h, int k) {
+        int hours = 0;
+        for (int pile : piles) {
+            hours += (pile + k - 1) / k; // Equivalent to ceil(pile / k)
+        }
+        return hours <= h;
+    }
+}
