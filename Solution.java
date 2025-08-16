@@ -1463,3 +1463,104 @@ class Solution {
         return hours <= h;
     }
 }
+
+
+// Leetcode 1004. Max Consecutive Ones III
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int zerocount= 0;
+        int start=0;
+        int max_ones=0;
+        for(int end=0;end<nums.length ;end++){
+            if(nums[end] == 0) zerocount++;
+            while(zerocount > k){
+                if(nums[start] == 0)zerocount--;
+                start++;
+            }
+            max_ones=Math.max(max_ones, end - start +1);
+        }
+        return max_ones;
+    }
+}
+
+
+
+// Leetcode 152. Maximum Product Subarray
+
+// Java implementation
+class Solution {
+    public int maxProduct(int[] nums) {
+        int pre = 1, suf = 1;
+        int res = Integer.MIN_VALUE;
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+            // Product from the front
+            pre *= nums[i];
+            res = Math.max(res, pre);
+            if (pre == 0) pre = 1;
+
+            // Product from the back
+            suf *= nums[n - 1 - i];
+            res = Math.max(res, suf);
+            if (suf == 0) suf = 1;
+        }
+
+        return res;
+    }
+}
+
+
+
+// Leetcode 733. Flood Fill
+
+// Runtime: 1 ms, faster than 90.98% of Java online submissions for Flood Fill.
+// Time Complexity : O(n*m)
+// Space Complexity : O(n*m)
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        // Avoid infinite loop if the new and old colors are the same...
+        if(image[sr][sc] == color) return image;
+        // Run the fill function starting at the position given...
+        fill(image, sr, sc, color, image[sr][sc]);
+        return image;
+    }
+    public void fill(int[][] image, int sr, int sc, int color, int cur) {
+        // If sr is less than 0 or greater equals to the length of image...
+        // Or, If sc is less than 0 or greater equals to the length of image[0]...
+        if(sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length) return;
+        // If image[sr][sc] is not equal to previous color...
+        if(cur != image[sr][sc]) return;
+        // Update the image[sr][sc] as a color...
+        image[sr][sc] = color;
+        // Make four recursive calls to the function with (sr-1, sc), (sr+1, sc), (sr, sc-1) and (sr, sc+1)...
+        fill(image, sr-1, sc, color, cur);
+        fill(image, sr+1, sc, color, cur);
+        fill(image, sr, sc-1, color, cur);
+        fill(image, sr, sc+1, color, cur);
+    }
+}
+
+
+// Leetcode 463. Island Perimeter 
+
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int rows=grid.length;
+        int col=grid[0].length;
+        int perimeter=0;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<col;j++){
+                if(grid[i][j]==0)continue;
+                if(i==0 || grid[i-1][j]==0)perimeter++;
+                if(i==rows-1 || grid[i+1][j]==0)perimeter++;
+                if(j==0 || grid[i][j-1]==0)perimeter++;
+                if(j==col-1 || grid[i][j+1]==0)perimeter++;
+            }
+        }return perimeter;
+    }
+}
+
+
+
