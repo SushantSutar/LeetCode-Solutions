@@ -1564,3 +1564,253 @@ class Solution {
 
 
 
+// leetcode 438. Find All Anagrams in a String
+
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> list=new ArrayList<>();
+        char[] chp = p.toCharArray();
+        Arrays.sort(chp);
+        String sortedP = new String(chp);
+        for(int i=0;i<=s.length()-p.length();i++){
+            char[] c=new char[p.length()];
+            for(int j=0;j<p.length();j++){
+                c[j]=s.charAt(i+j);
+            }
+            Arrays.sort(c);
+            String temp = new String(c);
+            if (temp.equals(sortedP)) list.add(i);
+
+        }
+        return list;
+    }
+}
+
+
+// leetcode 155. Min Stack
+
+class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> minstack;
+
+    public MinStack() {
+        stack=new Stack<>();
+        minstack= new Stack<>();
+    }
+    
+    public void push(int val) {
+        stack.push(val);
+
+        if(minstack.isEmpty() || val<=minstack.peek()) 
+            minstack.push(val);
+    }
+    
+    public void pop() {
+        if (!stack.isEmpty()) {
+            int val = stack.pop();
+            if (!minstack.isEmpty() && minstack.peek() == val)
+                minstack.pop();
+        }
+    }
+    
+    public int top() {
+        if (!stack.isEmpty())
+            return stack.peek();
+        return 0;
+    }
+    
+    public int getMin() {
+        if (!minstack.isEmpty())
+            return minstack.peek();
+        return 0;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+
+
+// leetcode 150. Evaluate Reverse Polish Notation
+
+class Solution {
+    Stack<Integer> stack=new Stack<>();
+
+
+    public int evalRPN(String[] tokens) {        
+        for(int i=0;i<tokens.length;i++){
+            if(isNumeric(tokens[i]))
+                stack.push(Integer.parseInt(tokens[i]));
+            else Operator(tokens[i]);
+                
+        }
+        return stack.peek();
+    }
+
+    public boolean isNumeric(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public void Operator(String str){
+        int val1=0;int val2=0;int res=0;
+        switch(str){
+            case "+":   val1=stack.pop();
+                        val2=stack.pop();
+                        res=val1+val2;
+                        stack.push(res);
+                        break;
+
+            case "-":   val1=stack.pop();
+                        val2=stack.pop();
+                        res=val2-val1;
+                        stack.push(res);
+                        break;
+
+            case "*":   val1=stack.pop();
+                        val2=stack.pop();
+                        res=val1*val2;
+                        stack.push(res);
+                        break;
+
+            case "/":   val1=stack.pop();
+                        val2=stack.pop();
+                        res=val2/val1;
+                        stack.push(res);
+                        break;
+        }
+    }
+}
+
+
+
+// leetcode 424. Longest Repeating Character Replacement
+
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int[] freq=new int[26];
+        int left=0;int maxfreq=0;
+        int maxwindow=0;
+
+        for(int right=0;right<s.length();right++){
+            freq[s.charAt(right)-'A']++;
+            maxfreq=Math.max(maxfreq,freq[s.charAt(right) - 'A']);
+            int windowLength=right-left+1;
+            if(windowLength-maxfreq>k){
+                freq[s.charAt(left) - 'A']--;
+                left++;
+            }    
+            windowLength=right-left+1;
+            maxwindow=Math.max(maxwindow,windowLength);
+        }
+        return maxwindow;
+    }
+}
+
+
+// leetcode 61. Rotate List
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode trav = head;
+        if (k == 0 || head == null || head.next == null) {
+            return head;
+        }
+
+        int len = 1;
+        while (trav.next != null) {
+            trav = trav.next;
+            len++;
+        }
+
+        trav.next = head;
+        k = k % len;// handling the case of if k > length eg : 12%5 = still it is 2
+        for (int i = 0; i < len - k; i++) {
+            trav = trav.next;
+            head = head.next;
+        }
+
+        trav.next = null;
+        return head;
+    }
+}
+
+
+
+// leetcode 109. Convert Sorted List to Binary Search Tree
+
+
+	case 1:
+Input: head = [-10,-3,0,5,9]
+Output: [0,-3,9,-10,null,5]
+Explanation: One possible answer is [0,-3,9,-10,null,5], which represents the shown height balanced BST.
+Example 2:
+	case 2:
+Input: head = []
+Output: [] 
+
+	
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null)return null;
+        if(head.next == null)return new TreeNode(head.val);
+        ListNode slow=head;ListNode fast=head;ListNode mid=slow;
+        while(fast != null && fast.next != null){
+           mid=slow; slow=slow.next;fast =fast.next.next;
+        }
+        TreeNode node=new TreeNode(slow.val);
+        mid.next=null;
+        node.left=sortedListToBST(head);
+        node.right=sortedListToBST(slow.next);
+        return node;
+    }
+}
+
