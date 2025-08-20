@@ -2018,3 +2018,70 @@ class Solution {
     }
 }
 
+
+
+// leetcode 24. Swap Nodes in Pairs
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode curr = head;
+        ListNode prev = null;
+
+        head = head.next; // update head to second node after first swap
+
+        while (curr != null && curr.next != null) {
+            ListNode second = curr.next;
+            ListNode nextPair = second.next;
+
+            // Swap
+            second.next = curr;
+            curr.next = nextPair;
+
+            // Link previous pair to current swapped pair
+            if (prev != null) {
+                prev.next = second;
+            }
+
+            // Move forward
+            prev = curr;
+            curr = nextPair;
+        }
+
+        return head;
+    }
+}
+
+
+// leetcode 387. First Unique Character in a String
+
+class Solution {
+    public int firstUniqChar(String s) {
+        Map<Character,Integer> map=new HashMap<>();
+        // int max =-1;
+        for(int i=0;i<s.length();i++){
+            if(map.containsKey(s.charAt(i)))
+                map.put(s.charAt(i),map.get(s.charAt(i))+1);
+            else
+                map.put(s.charAt(i),1);
+        }
+        for(int i=0;i<s.length();i++){
+            if(map.get(s.charAt(i))==1){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
