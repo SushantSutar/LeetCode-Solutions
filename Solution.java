@@ -1814,3 +1814,207 @@ class Solution {
     }
 }
 
+
+
+// leetcode 3. Longest Substring Without Repeating Characters
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int max = 0;
+        int start = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (map.containsKey(ch)) {
+                // Move the start just after the last occurrence of the duplicate
+                start = Math.max(start, map.get(ch) + 1);
+            }
+
+            map.put(ch, i);
+            max = Math.max(max, i - start + 1);
+        }
+
+        return max;
+
+        
+    }
+}
+
+// leetcode 88. Merge Sorted Array
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int []arr=new int[m+n];
+        int i=0;int j=0;int k=0;
+        while(i<m && j<n){
+            if(nums1[i]<nums2[j]){
+                arr[k]=nums1[i];
+                i++;k++;
+            }else if(nums1[i]==nums2[j]){
+                arr[k]=nums1[i];i++;k++;
+            }else{
+                arr[k]=nums2[j];j++;k++;
+            }
+        }
+        while(j<n){
+            arr[k]=nums2[j];j++;k++;
+        }
+        while(i<m){
+            arr[k]=nums1[i];i++;k++;
+        }
+        for (int z=0; z<arr.length; z++){
+            nums1[z]=arr[z];
+        } 
+    }
+
+}// i did perfect but used extra space in this above code 
+
+/*
+best solution 
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int j = 0, i = m; j < n; j++) {
+            nums1[i] = nums2[j];
+            i++;
+        }
+        Arrays.sort(nums1);
+    }
+}
+
+ */
+
+// leetcode 189. Rotate Array
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+////////////////////////////////////////////////////////
+        // if(k>=nums.length)return;
+        // int temp[]=new int[nums.length];int m=0;
+        // for(int i=nums.length-k; i<nums.length;i++){
+        //     temp[m]=nums[i];m++;
+        // }
+        // for(int i=0;i<nums.length-k;i++){
+        //     temp[m]=nums[i];m++;
+        // }
+        // for(int i=0;i<nums.length;i++){
+        //     nums[i]=temp[i];
+        // }  //above solution passes only 28 / 39 testcases passed
+///////////////////////////////////////////////////////
+        // for(int i=0;i< k;i++){
+        //     int temp=nums[nums.length-1];
+        //     for(int j=nums.length-1;j >= 1;j--){
+        //         nums[j]=nums[j-1];
+        //     }
+        //     nums[0]=temp;
+        // }// above solution is perfect but Time Limit Exceeded 38 / 39 testcases passed
+//////////////////////////////////////////////////////////
+        int n=nums.length;
+        k %= n;
+        reversr(nums,0,n-1);
+        reversr(nums,0,k-1);
+        reversr(nums,k,n-1);
+        
+    }
+    public void reversr(int[] nums,int start,int end){
+        while(start<end){
+            int temp=nums[end];
+            nums[end]=nums[start];
+            nums[start]=temp;
+            start++;end--;
+        }
+    }
+}
+
+// leetcode 5. Longest Palindromic Substring
+
+public class Solution {
+    public String longestPalindrome(String s) {
+        if(s.length()<=1)return s;
+        String res="";
+        for(int i=1;i<s.length();i++){
+            int low =i;
+            int high=i;
+            while(s.charAt(low)== s.charAt(high)){
+                low--;high++;
+                if(low ==-1 || high == s.length())break;
+            }
+            String palandrome = s.substring(low+1,high);
+            if(palandrome.length() > res.length())res=palandrome;
+
+
+            low =i-1;
+            high=i;
+            while(s.charAt(low)== s.charAt(high)){
+                low--;high++;
+                if(low ==-1 || high == s.length())break;
+            }
+            palandrome = s.substring(low+1,high);
+            if(palandrome.length() > res.length())res=palandrome;
+
+        }
+        return res;
+//////////////////////////////////////////////////////////////
+    //     if (s.length() <= 1) {
+    //         return s;
+    //     }
+
+    //     int maxLen = 1;
+    //     String maxStr = s.substring(0, 1);
+
+    //     for (int i = 0; i < s.length(); i++) {
+    //         for (int j = i + maxLen; j <= s.length(); j++) {
+    //             if (j - i > maxLen && isPalindrome(s.substring(i, j))) {
+    //                 maxLen = j - i;
+    //                 maxStr = s.substring(i, j);
+    //             }
+    //         }
+    //     }
+
+    //     return maxStr;
+    // }
+
+    // private boolean isPalindrome(String str) {
+    //     int left = 0;
+    //     int right = str.length() - 1;
+
+    //     while (left < right) {
+    //         if (str.charAt(left) != str.charAt(right)) {
+    //             return false;
+    //         }
+    //         left++;
+    //         right--;
+    //     }
+
+    //     return true;
+    }
+}
+
+
+
+// leetcode 1456. Maximum Number of Vowels in a Substring of Given Length
+
+class Solution {
+    public int maxVowels(String s, int k) {
+        int window =0;int maxcount=0;
+        Set<Character> vovels=new HashSet<>();
+        vovels.add('a');vovels.add('e');
+        vovels.add('i');vovels.add('o');vovels.add('u');
+        for(int i=0;i<k;i++){
+            if(vovels.contains(s.charAt(i)))
+                window++;
+        }
+        maxcount=window;
+        for(int i=k;i<s.length();i++){
+            if(vovels.contains(s.charAt(i-k)))  
+                window--;
+            if(vovels.contains(s.charAt(i)))
+                window++;
+            maxcount=Math.max(maxcount,window);
+            if(maxcount==k)return maxcount;
+        }
+        return maxcount;
+    }
+}
+
