@@ -2085,8 +2085,7 @@ class Solution {
     }
 }
 
-
-Solved Spiral matrix and number of occurance of charactrers in string
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
  
 the students are given a string with multiple characters that 
@@ -2142,6 +2141,7 @@ Output
 1 2 3 4 8 12 16 20 19 18 17 13 9 5 6 7 11 15 12 14 10
 
 */
+//Note :  if the numbers of bike and cars are combined then do use formula for extracting cars and bikes 
 
 import java.util.*;
 public class Main
@@ -2178,3 +2178,228 @@ public class Main
 	}
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Problem Statement
+Bela teaches her daughter to find the factors of a given number. 
+When she provides a number to her daughter, she should tell the factors of that number. 
+Help her to do this, by writing a program. Write a class FindFactor.java 
+and write the main method in it
+Note:
+If the input provided is negative, ignore the sigh and provide the output. If the input is zero
+If the input is zero the output should be "No Factors".
+Sample Input 1:
+54
+Sample Output 1:
+1, 2, 3, 6, 9, 18, 27, 54
+*/
+
+
+import java.util.*;
+public class Main {
+    
+    public static String findFactor(int n){
+        if(n==0)return "No Factors";
+        String res=""+n;
+        for (int i=n-1; i>=1; i--){
+            if(n%i==0){
+                res=i+","+res;
+            }
+        } 
+        return res;
+    }
+    public static void main (String[] args) {
+        System.out.println(findFactor(54));
+    }
+}
+
+/*
+You have write a function that accepts, a string which length is "len", 
+the string has some "#", in it you have to move all the hashes to the front 
+of the string and return the whole string back and print it
+Input:
+Movel#Hash#to#Front
+Output:
+###MovelHashtoFront
+
+
+*/
+import java.util.*;
+public class Main {
+    public static String HashesINFrount(String s){
+        StringBuffer res=new StringBuffer();
+        Deque<Character> q=new ArrayDeque<>();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch=='#'){
+                q.addFirst(ch);
+            }else{
+                q.addLast(ch);
+            }
+        }
+        while (!q.isEmpty()) {
+            res.append(q.removeFirst());
+        } 
+        return res.toString();
+    }
+    
+    public static void main (String[] args) {
+        System.out.print("Message : "+ HashesINFrount("MAP#sdggv#SUSHANT##GFG"));
+    }
+}
+
+/*
+Pythagorean Triplets: Problem: Generate all Pythagorean triplets with values 
+smaller than a given limit. Input: Limit 20 Output: 0345 8618 0512 13 15 8:17. 12. 16 20
+*/
+
+public class PythagoreanTriplets {
+    public static void main(String[] args) {
+        int limit = 20;  // given limit
+
+        for (int a = 1; a < limit; a++) {
+            for (int b = a; b < limit; b++) { // b starts from a to avoid duplicates
+                int cSquare = a * a + b * b;
+                int c = (int) Math.sqrt(cSquare);
+
+                if (c * c == cSquare && c < limit) {
+                    System.out.println(a + " " + b + " " + c);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/*
+String Rotation: Problem: Determine if one string is a rotation of another. 
+Input : s1 :ABCD 
+s2 : CDAB 
+Output : true
+*/
+class Solution {
+    public boolean isRotation(String s1, String s2) {
+        // If lengths differ, can't be rotations
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        // Rotation trick: s1+s1 contains all rotations of s1
+        String combined = s1 + s1; // ABCDABCD->AB CDAB CD
+
+        return combined.contains(s2);
+    }
+}
+
+
+
+
+class Main {
+    static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int val) { this.val = val; }
+    }
+    
+    
+
+    public static ListNode reverseList(ListNode head) {
+        if (head==null)return head;
+        ListNode pre=null;
+        ListNode curr=head;
+        while(curr!=null ){
+            ListNode sec=curr.next;
+            curr.next=pre;
+            pre=curr;
+            curr=sec;
+        }
+        head =pre;
+        return head;
+    }
+    
+    
+    
+    
+/*
+Reverse Linked List problem from LeetCode (#206)	
+*/
+    
+    
+    
+
+    public static void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + " ");
+            head = head.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Create list: 1 -> 2 -> 3 -> 4 -> 5
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        System.out.println("Original List:");
+        printList(head);
+
+        ListNode reversed = reverseList(head);
+
+        System.out.println("Reversed List:");
+        printList(reversed);
+    }
+}
+
+/*
+Merge Two Sorted Arrays:
+Problem: Merge two sorted arrays into a single sorted array.
+Input:{1,2,3,4,5}
+    {1,3,4,5,6,7}
+Output: 1 1 2 3 3 4 4 5 5 6 7 
+*/
+public class Main{
+    public static void combinearray(int []arr1, int []arr2){
+        int res[]=new int[arr1.length+arr2.length];
+        int i=0;int j=0;int k=0;
+        while(i<arr1.length && j<arr2.length){
+            if (arr1[i]<=arr2[j] ){
+                res[k]=arr1[i];
+                i++;
+            }else if(arr1[i]>arr2[j]){
+                res[k]=arr2[j];
+                j++;
+            }
+            k++;
+        } 
+        // System.out.println("i : "+i);
+        // System.out.println("j : "+j);
+        // System.out.println("k : "+k);
+        if(i<arr1.length){
+            for(int s=i;s<arr1.length;s++){
+                res[k]=arr1[s];
+            }
+        }else{
+            for(int s=j;s<arr2.length;s++){
+                res[k]=arr2[s];k++;
+            }
+        }
+        
+        for (int z=0;z<res.length;z++ ){
+            System.out.print(res[z]+" ");
+        } 
+    }
+    public static void main (String[] args) {
+        int arr1[]={1,2,3,4,5};
+        int arr2[]={1,3,4,5,6,7};
+        combinearray(arr1,arr2);
+    }
+} 
