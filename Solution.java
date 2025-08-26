@@ -2085,3 +2085,96 @@ class Solution {
     }
 }
 
+
+Solved Spiral matrix and number of occurance of charactrers in string
+/*
+ 
+the students are given a string with multiple characters that 
+are repeated consecutively. You're supposed to reduce the size of this 
+string using mathematical logic given as in the example below:
+Input:
+aabbbbeeeeffggg
+Output:
+a2b4e4f2g3
+
+*/
+public class Main
+{
+    public static String findOccurence(String s){
+        String res="";
+        for (int i=0; i< s.length(); i++){
+            char ch=s.charAt(i);
+            int count=1;
+            int j=i+1;
+            // System.out.println(j);
+            while(j<s.length() &&ch==(s.charAt(j)) ){
+                j++;
+                count++;
+            }
+            i=j-1;
+            
+            res=res+ch+count;
+            // System.out.println(res);
+        } 
+        
+        
+        return res;
+    }
+	public static void main(String[] args) {
+		System.out.println("Output : "+ findOccurence("aaabbbbbccddde"));
+	}
+}
+
+
+
+/*
+Write the code to traverse a matrix in a spiral format.
+Sample Input:
+
+ 5   4 
+  1  2  3  4
+  5  6  7  8 
+  9 10 11 12 
+  13 14 15 16 
+  17 18 19 20
+
+Output
+1 2 3 4 8 12 16 20 19 18 17 13 9 5 6 7 11 15 12 14 10
+
+*/
+
+import java.util.*;
+public class Main
+{
+    public static List<Integer> spiralOrder(int[][] matrix){
+        List<Integer> list=new ArrayList<>();
+        int colbegin=0;int colend=matrix[0].length-1;
+        int rowbegin=0;int rowend=matrix.length-1;
+        while(colbegin<=colend && rowbegin<=rowend){
+            for (int i=colbegin; i<=colend; i++){
+                list.add(matrix[rowbegin][i]);
+            } rowbegin++;
+            for (int i=rowbegin; i<=rowend; i++){
+                list.add(matrix[i][colend]);
+            } colend--;
+            
+            // if(rowbegin<=rowend) ///////////
+            for(int i=colend;i>=colbegin;i--){
+                list.add(matrix[rowend][i]);
+            }   rowend--;
+            
+            // if(colbegin<=colend)////////////
+            for (int i= rowend; i>=rowbegin; i--){
+                list.add(matrix[i][colbegin]);
+            } colbegin++;
+            
+        }
+        return list;
+    }
+	public static void main(String[] args) {
+	    int [][]matrix={{1,2,3},{4,5,6},{7,8,9}};
+	    List<Integer> list=spiralOrder(matrix);
+		list.forEach(x->System.out.print(x + " "));
+	}
+}
+
