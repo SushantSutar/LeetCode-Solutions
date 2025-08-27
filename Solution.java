@@ -2403,3 +2403,41 @@ public class Main{
         combinearray(arr1,arr2);
     }
 } 
+
+
+/*
+Iterating the Map with entrySet(), keySet(), value(), Lambda Expression
+*/
+
+import java.util.*;
+public class Main
+{
+    public static List<Integer> findDuplicates(int []arr){
+        Map<Integer,Integer> map=new HashMap<>();
+        for (int i=0; i<arr.length; i++){
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+        }
+        List<Integer> list=new ArrayList<>();
+        for (Map.Entry<Integer,Integer> entry : map.entrySet()){
+            System.out.println("key :" + entry.getKey() + " value :"+ entry.getValue());
+        } 
+        System.out.println();
+
+        for(int x: map.keySet()){
+            System.out.print(" " + x);
+        }
+        System.out.println();
+        map.forEach((x,y)-> {
+            if (y >= 2) {
+                list.add(x);
+            }
+        });
+        return list;
+        
+    }
+	public static void main(String[] args) {
+        int []arr={1,1,2,3,4,5,5,6,7,7,7,7,8,8};
+        List<Integer> res=findDuplicates(arr);
+        res.forEach(x->System.out.print(x+" "));
+	}
+}
