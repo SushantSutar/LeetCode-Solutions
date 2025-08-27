@@ -2493,3 +2493,113 @@ class Solution {
         return maxSum;
     }
 }
+
+ 
+// Leetcode 350. Intersection of Two Arrays II
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        // ArrayList<Integer> list=new ArrayList<>();
+        // for(int i=0;i<nums1.length;i++){
+        //     for(int j=0;j<nums2.length;j++){
+        //         if(nums1[i]==nums2[j] && !list.contains(nums1[i]))list.add(nums1[i]);
+        //     }
+        // }
+        // int[] arr=new int[list.size()];
+        // for(int i=0;i<arr.length;i++){
+        //     arr[i]=list.get(i);
+        // }
+        // return arr; // this ligic is not iffecient and worong for test case 1 
+////////////////////////////////////////////////////////////////
+        // HashSet<Integer> set=new HashSet<>();
+        // for(int i=0;i<nums1.length;i++){
+        //     set.add(nums1[i]);
+        // }
+        // for(int i=0;i<nums2.length;i++){
+        //     set.add(nums2[i]);
+        // }
+
+        // int[] arr=new int[set.size()];
+        // int index = 0;
+        // for (int element : set) {
+        //     arr[index++] = element;
+        // }
+        // return arr; // this is google logic but wrong
+        ArrayList<Integer> list=new ArrayList<>();
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i=0,j=0;
+        while(i<nums1.length && j<nums2.length){
+            if(nums1[i]== nums2[j]){
+                list.add(nums1[i]);
+                i++;j++;
+            }else if(nums1[i]<nums2[j]){
+                i++;
+            }else{
+                j++;
+            }
+        }
+        int arr[] =new int[list.size()];
+        for(int z=0;z<list.size();z++){
+            arr[z]=list.get(z);
+        }
+        return arr;
+    }
+}
+
+
+
+// Leetcode 349. Intersection of Two Arrays
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        // int l1=nums1.length;
+		// int l2=nums2.length;
+		// int min=Integer.min(l1, l2);
+		
+        // int[] temp=new int[min];
+        // int k=0;
+		// for(int i=0;i<l1;i++) {
+		// 	for(int j=0;j<l2;j++) {
+		// 		if(nums1[i] == nums2[j]) {
+		// 			boolean duplicate=false;
+		// 			for(int x=0;x<k;x++) {
+		// 				if(temp[x]==nums1[i]) {
+		// 					duplicate=true;
+		// 					break;
+
+		// 				}
+		// 			}
+		// 			if(!duplicate) {
+		// 				temp[k]=nums1[i];
+		// 				k+=1;
+		// 			}
+					
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		
+		// int[] result=new int[k];
+		// for(int i=0;i<k;i++) {
+		// 	result[i]=temp[i];
+		// }
+		// return result;// OR 
+        Set<Integer> set=new HashSet<>();
+        for (int i=0; i<nums1.length; i++){
+            set.add(nums1[i]);
+        } 
+        List<Integer> list=new ArrayList<>();
+        for (int i=0; i<nums2.length; i++){
+            if(set.contains(nums2[i])){
+                if(!list.contains(nums2[i])){
+                    list.add(nums2[i]);
+                }
+            }
+        } 
+        int []res=new int[list.size()];
+        for (int i=0; i<res.length;i++ ){
+            res[i]=list.get(i);
+        }
+        return res;// But same timecomplexity
+    }
+}
