@@ -2441,3 +2441,55 @@ public class Main
         res.forEach(x->System.out.print(x+" "));
 	}
 }
+
+/*
+validate balanced parentheses
+checking whether every opening parenthesis '(' has a corresponding closing parenthesis ')' in the correct order.
+*/
+
+
+import java.util.*;
+public class Main
+{
+    public static boolean checkParentheses(String s){
+        Stack<Character> st=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if (c == '(') {
+                st.push(c);
+            } else if (c == ')') {
+                if (st.isEmpty()) {
+                    return false; // unmatched closing parenthesis
+                }
+                st.pop();
+            }
+        }
+        return st.isEmpty(); // true if all parentheses matched
+        
+    }
+	public static void main(String[] args) {
+        
+        boolean res=checkParentheses("()((())())");
+        if(res)System.out.print("valid");
+        else System.out.print("invalid");
+	}
+}
+
+// Leetcode 53. Maximum Subarray
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxSum = Integer.MIN_VALUE;
+        int currentSum = 0;
+        for(int i=0;i<nums.length;i++){
+            currentSum=currentSum+nums[i];
+            if(currentSum>maxSum){
+                maxSum=currentSum;
+            }
+            if(currentSum<0){
+                currentSum=0;
+            }
+        }
+        return maxSum;
+    }
+}
