@@ -2782,4 +2782,148 @@ class Solution {
 
 
 
+// Leetcode 316. Remove Duplicate Letters
+Given a string s, remove duplicate letters so that every letter appears once and only once. 
+You must make sure your result is the smallest in lexicographical order among all possible results.
+Example 1:
+Input: s = "bcabc"
+Output: "abc"
+	
+Example 2:
+Input: s = "cbacdcbc"
+Output: "acdb"
+
+
+
+// class Solution {
+//     public String removeDuplicateLetters(String s) {
+//         Stack<Character> stack=new Stack<>();
+//         for(int i=0; i< s.length(); i++ ){
+//             char c=s.charAt(i);
+//             if(stack.isEmpty()){
+//                 stack.push(c);
+//                 continue;
+//             }
+//             if(stack.peek()==c)continue;
+//             if( stack.peek()-c >= 1 && s.indexOf(stack.peek(),0) <= findNextIndex(stack.peek(), i, s)){
+//                 stack.pop();
+//                 stack.push(c); continue;
+//             }
+//             stack.push(c);
+//         }
+//         String res="";
+//         while(!stack.isEmpty())res=res+stack.pop(); 
+//         StringBuilder sb = new StringBuilder(res);
+//         String reversedString = sb.reverse().toString();
+//         return reversedString;
+//     }
+
+//     public int findNextIndex(char c ,int i , String s){
+//         int temp=i;
+//         for(int j=i;j<s.length();j++){
+//             if(s.charAt(j) == c)temp = j;
+//         }
+//         return temp;
+//     }
+// }// i tried my best but good logic but i was not maintaining the occured element 
+
+
+class Solution {
+    public String removeDuplicateLetters(String s) {
+        Stack<Character> stack = new Stack<>();
+        boolean[] seen = new boolean[26];
+        int[] lastIndex = new int[26];
+
+        for (int i = 0; i < s.length(); i++) {
+            lastIndex[s.charAt(i) - 'a'] = i;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (seen[c - 'a']) continue;
+
+            while (!stack.isEmpty() && stack.peek() > c && lastIndex[stack.peek() - 'a'] > i) {
+                seen[stack.pop() - 'a'] = false;
+            }
+
+            stack.push(c);
+            seen[c - 'a'] = true;
+        }
+
+        String res = "";
+        while (!stack.isEmpty()) res = stack.pop()+ res;
+        return res;
+    }
+
+    public int findNextIndex(char c, int i, String s) {
+        int temp = i;
+        for (int j = i; j < s.length(); j++) {
+            if (s.charAt(j) == c) temp = j;
+        }
+        return temp;
+    }
+}
+
+
+// bellow code is for remove duplicates but not with lexicographical
+import java.util.*;
+public class Main
+{
+    public static String removeDuplicateLetters(String s){
+        Map<Character,Integer> map=new HashMap<>();
+        for (int i=0; i<s.length(); i++){
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        }
+        String res="";
+        for (int i=0; i<s.length(); i++){
+            char c=s.charAt(i);
+            if(map.containsKey(c)){
+                if(map.get(c)>1){
+                    map.put(c,map.get(c)-1);
+                }else if (map.get(c) ==1){
+                    res=res+c;
+                } 
+            }
+        }
+        return res;
+    }
+
+	public static void main(String[] args) {
+	    System.out.print(removeDuplicateLetters("cbacdcbc"));
+	}
+}
+
+
+
+
+// Leetcode 1047. Remove All Adjacent Duplicates In String
+Example 1:
+Input: s = "abbaca"
+Output: "ca"
+Explanation: 
+For example, in "abbaca" we could remove "bb" since the letters are adjacent and equal, 
+and this is the only possible move.  The result of this move is that the string is "aaca", 
+of which only "aa" is possible, so the final string is "ca".
+	
+Example 2:
+Input: s = "azxxzy"
+Output: "ay"
+	
+class Solution {
+    public String removeDuplicates(String s) {
+        char[] st=new char[s.length()];
+		int top=-1;
+		for (int i = 0; i < s.length(); i++) {
+			char c=s.charAt(i);
+			if (top>-1 && c==st[top]) {
+				top--;
+			}else {
+				top++;
+				st[top]=c;
+			}
+		}
+        return new String(st, 0, top+1);
+    }
+}
+
 
