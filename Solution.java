@@ -2603,3 +2603,183 @@ class Solution {
         return res;// But same timecomplexity
     }
 }
+
+
+
+// Leetcode 125 Valid Palindrome
+
+class Solution {
+    public boolean isPalindrome(String s) {
+        int i=0;
+        int j=s.length()-1;
+        while(i<=j){
+            char fromStart=s.charAt(i);
+            char fromLast=s.charAt(j);
+            if(!Character.isLetterOrDigit(fromStart)){
+                i++;
+            }else if(!Character.isLetterOrDigit(fromLast)){
+                j--;
+            }else{
+                if(Character.toLowerCase(fromStart)!=Character.
+                    toLowerCase(fromLast)){
+                        return false;
+                    }
+                    i++;j--;
+            }
+        }
+        return true;
+    }
+}
+
+/* // bellow code is same as above 
+
+public class Main
+{
+    public static boolean isPalindrome(String s) {
+        int left=0;int right=s.length()-1;
+        while(left<right){
+            while(!Character.isLetterOrDigit(s.charAt(left)))left++;
+            while(!Character.isLetterOrDigit(s.charAt(right)))right--;
+            if (Character.toLowerCase(s.charAt(left))!=Character.toLowerCase(s.charAt(right))){
+                return false;
+            } 
+            left++;right--;
+        }
+        return true;
+    }
+
+	public static void main(String[] args) {
+		System.out.println("answer is : " + isPalindrome("A man, a plan, a canal: Panama"));
+		System.out.println("answer is : " + isPalindrome("race a car"));
+		System.out.println("answer is : " + isPalindrome(" "));
+	}
+}
+ */
+
+
+
+// Leetcode 49. Group Anagrams
+/*
+Example 1:
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Explanation:
+There is no string in strs that can be rearranged to form "bat".
+The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
+
+Example 2:
+Input: strs = [""]
+Output: [[""]]
+
+Example 3:
+Input: strs = ["a"]
+Output: [["a"]]
+*/
+import java.util.*;
+public class Main
+{
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> map=new HashMap<>();
+        for (int i=0; i<strs.length; i++){
+            String temp=strs[i];
+            char[] c=temp.toCharArray();
+            Arrays.sort(c);
+            temp=new String(c);
+            if(!map.containsKey(temp)){
+                map.put(temp,new ArrayList());
+            }
+            map.get(temp).add(strs[i]);
+        } 
+        return new ArrayList<>(map.values());
+        
+    }
+
+	public static void main(String[] args) {
+	    String []arr1={"eat","tea","tan","ate","nat","bat"};
+		List<List<String>> list=groupAnagrams(arr1);
+		System.out.println(list);
+	    String []arr2={""};
+		List<List<String>> list2=groupAnagrams(arr2);
+		System.out.println(list2);
+	}
+}
+
+ 
+
+
+// Leetcode 2273. Find Resultant Array After Removing Anagrams
+/*
+Input: words = ["abba","baba","bbaa","cd","cd"]
+Output: ["abba","cd"]
+Explanation:
+One of the ways we can obtain the resultant array is by using the following operations:
+- Since words[2] = "bbaa" and words[1] = "baba" are anagrams, we choose index 2 and delete words[2].
+  Now words = ["abba","baba","cd","cd"].
+- Since words[1] = "baba" and words[0] = "abba" are anagrams, we choose index 1 and delete words[1].
+  Now words = ["abba","cd","cd"].
+- Since words[2] = "cd" and words[1] = "cd" are anagrams, we choose index 2 and delete words[2].
+  Now words = ["abba","cd"].
+We can no longer perform any operations, so ["abba","cd"] is the final answer.
+Example 2:
+
+Input: words = ["a","b","c","d","e"]
+Output: ["a","b","c","d","e"]
+Explanation:
+No two adjacent strings in words are anagrams of each other, so no operations are performed.
+	*/
+// class Solution {
+//     public List<String> removeAnagrams(String[] words) {
+//         Set<String> set=new HashSet<>();
+//         List<String> list=new ArrayList<>();
+
+//         for(int i=0;i<words.length;i++){
+//             char[] ch =words[i].toCharArray();
+//             Arrays.sort(ch);
+//             String res=new String(ch);
+//             if(set.isEmpty()){
+//                 set.add(res);
+//                 list.add(words[i]);
+//             }else if(set.contains(res)){
+//                 continue;
+//             }else{
+//                 set.add(res);
+//                 list.add(words[i]);
+//             }
+
+//         }
+//         return list;
+//     }
+// } // this approach is good but it checks all the previous anagrams also so the 
+// question said to just see its previous one not all previous ones
+// so now this code fails on eg :["a","b","a"]
+/*
+Output
+["a","b"]
+Expected
+["a","b","a"]
+ */
+
+class Solution {
+    public List<String> removeAnagrams(String[] words) {
+        List<String> list = new ArrayList<>();
+        String prev = "";
+
+        for (int i = 0; i < words.length; i++) {
+            char[] ch = words[i].toCharArray();
+            Arrays.sort(ch);
+            String sorted = new String(ch);
+            if (sorted.equals(prev)) {
+                continue;
+            }
+            list.add(words[i]);
+            prev = sorted;
+        }
+        return list;
+    }
+}
+
+
+
+
+
