@@ -2972,3 +2972,161 @@ class Solution {
         return count;
     }
 }
+
+
+// Leetcode 1592. Rearrange Spaces Between Words
+Example 1:
+Input: text = "  this   is  a sentence "
+Output: "this   is   a   sentence"
+Explanation: There are a total of 9 spaces and 4 words. We can evenly 
+	divide the 9 spaces between the words: 9 / (4-1) = 3 spaces.
+	
+Example 2:
+Input: text = " practice   makes   perfect"
+Output: "practice   makes   perfect "
+Explanation: There are a total of 7 spaces and 3 words. 7 / (3-1) = 3 spaces 
+	plus 1 extra space. We place this extra space at the end of the string.
+
+
+	
+class Solution {
+    public String reorderSpaces(String text) {
+        int length=text.length();
+        List<String> list=new ArrayList<>();
+        int total_words=0;   // here this will count chars of words
+        for(int i=0;i<text.length();i++){
+            if(text.charAt(i)!=' '){
+                String temp="";
+                while(i<text.length() && text.charAt(i)!=' '){ // fix condition
+                    temp=temp+text.charAt(i);
+                    i++;
+                    total_words++;   // counts characters of words
+                }
+                list.add(temp);
+            }             
+        }
+        int wordsLength=list.size();
+        int total_spaces=length-total_words;   // spaces = total length - chars of words
+        String res="";        
+        if(wordsLength==1){   // special case: only one word
+            res=res+list.get(0);
+            for(int i=0;i<total_spaces;i++){
+                res=res+" ";
+            }
+            return res;
+        }
+        int space=total_spaces/(wordsLength-1);
+        int remainder=total_spaces%(wordsLength-1);
+        for(int i=0;i<list.size();i++){
+            res=res+list.get(i);
+            if(i!=list.size()-1){
+                for(int j=0;j<space;j++){
+                    res=res+" ";
+                }
+            }            
+        }
+        for(int i=0;i<remainder;i++){
+            res=res+" ";
+        }
+        
+        return res;
+    }
+}
+
+
+
+// Leetcode 58. Length of Last Word
+Example 1:
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+	
+Example 2:
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+	
+Example 3:
+Input: s = "luffy is still joyboy"
+Output: 6
+Explanation: The last word is "joyboy" with length 6.
+
+	
+
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        String[] st=s.split(" +");
+        return st[st.length-1].length();
+    }
+}
+
+
+
+// Leetcode 3340. Check Balanced String
+
+
+Example 1:
+Input: num = "1234"
+Output: false
+Explanation:
+The sum of digits at even indices is 1 + 3 == 4, and the sum of digits at odd indices is 2 + 4 == 6.
+Since 4 is not equal to 6, num is not balanced.
+	
+Example 2:
+Input: num = "24123"
+Output: true
+Explanation:
+The sum of digits at even indices is 2 + 1 + 3 == 6, and the sum of digits at odd indices is 4 + 2 == 6.
+Since both are equal the num is balanced.
+
+
+
+	// class Solution {
+//     public boolean isBalanced(String num) {
+//         int original=Integer.parseInt(num);
+//         int i=num.length();
+//         int sum1=0;
+//         int temp=original;
+//         while(i>0){
+//             int val=temp%10;
+//             sum1=sum1+val;
+//             i -= 2;temp=temp/100;
+//         }        
+        
+//         temp=original/10;
+//         i=num.length();
+//         int sum2=0;
+//         while(i>0){
+//             int val=temp%10;
+//             sum2=sum2+val;
+//             i -= 2;temp=temp/100;
+//         }
+
+//         if(sum1==sum2)return true;
+//         return false;
+//     }
+// }// above logic is good but fails at int original=Integer.parseInt(num);
+//if the input is 7123816724 greater than the integer range
+
+class Solution {
+    public boolean isBalanced(String num) {
+        int sum1=0;
+        int sum2=0;
+        for(int i=0;i<num.length();i++){
+            char temp=num.charAt(i);
+            int s=temp- '0';
+            sum1=sum1+s;
+            i++;
+        }
+        for(int i=1;i<num.length();i++){
+            char temp=num.charAt(i);
+            int s=temp- '0';
+            sum2=sum2+s;
+            i++;
+        }
+
+        if(sum1==sum2)return true;
+        return false;
+    }
+}
