@@ -3130,3 +3130,171 @@ class Solution {
         return false;
     }
 }
+
+
+
+// Leetcode 1910. Remove All Occurrences of a Substring
+
+
+Example 1:
+
+Input: s = "daabcbaabcbc", part = "abc"
+Output: "dab"
+Explanation: The following operations are done:
+- s = "daabcbaabcbc", remove "abc" starting at index 2, so s = "dabaabcbc".
+- s = "dabaabcbc", remove "abc" starting at index 4, so s = "dababc".
+- s = "dababc", remove "abc" starting at index 3, so s = "dab".
+Now s has no occurrences of "abc".
+Example 2:
+
+Input: s = "axxxxyyyyb", part = "xy"
+Output: "ab"
+Explanation: The following operations are done:
+- s = "axxxxyyyyb", remove "xy" starting at index 4 so s = "axxxyyyb".
+- s = "axxxyyyb", remove "xy" starting at index 3 so s = "axxyyb".
+- s = "axxyyb", remove "xy" starting at index 2 so s = "axyb".
+- s = "axyb", remove "xy" starting at index 1 so s = "ab".
+Now s has no occurrences of "xy".
+
+
+	
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        StringBuffer sb = new StringBuffer(s);        
+        while (sb.indexOf(part) != -1) { 
+            int index = sb.indexOf(part);
+            sb.delete(index, index + part.length()); 
+        }        
+        return sb.toString();
+    }
+}
+
+
+
+
+
+// Leetcode 27. Remove Element
+
+Example 1:
+
+Input: nums = [3,2,2,3], val = 3
+Output: 2, nums = [2,2,_,_]
+Explanation: Your function should return k = 2, with the first two elements of nums being 2.
+It does not matter what you leave beyond the returned k (hence they are underscores).
+Example 2:
+
+Input: nums = [0,1,2,2,3,0,4,2], val = 2
+Output: 5, nums = [0,1,4,0,3,_,_,_]
+Explanation: Your function should return k = 5, with the first five elements of nums containing 0, 0, 1, 3, and 4.
+Note that the five elements can be returned in any order.
+It does not matter what you leave beyond the returned k (hence they are underscores).
+
+
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        int index=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=val){
+                nums[index]=nums[i];
+                index++;
+            }
+        }
+        return index;
+
+        // ArrayList<Integer> arr=new ArrayList<>();
+		// int j=nums.length-1;
+		// if (nums.length==1 && nums[0]!=val) {
+		// 	return 1;
+		// }else {
+			
+		
+		// for (int i = 0; i < nums.length/2; i++) {
+			
+		// 		if (nums[i]!=val) {
+		// 			arr.add(nums[i]);;
+		// 		}
+		// 		if (nums[j]!=val) {
+		// 			arr.add(nums[j]);
+					
+		// 		}j--;			
+		// }
+		// int size=arr.size();
+		// for (int i = 0; i < nums.length; i++) {
+		// 	if(!arr.isEmpty()) {
+		// 		nums[i]=arr.removeFirst();
+		// 	}else {
+		// 		break;
+		// 	}
+			
+		// }
+		// return size;
+		// }
+    }
+}
+
+
+
+// Leetcode 567. Permutation in String
+
+ 
+
+Example 1:
+
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+Example 2:
+
+Input: s1 = "ab", s2 = "eidboaoo"
+Output: false
+
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int m=s1.length();//
+        int n=s2.length();
+        if(n<m)return false;
+        int[] map1=new int[26];
+        for(int i=0; i<m;i++){
+            map1[s1.charAt(i) - 'a']++;
+        }
+        for(int i=0;i<=n-m;i++){
+            int map2[]=new int[26];
+            for(int j=0;j<m;j++){
+                map2[s2.charAt(i+j)-'a']++;
+            }
+            if(helper(map1,map2))return true;
+        }
+        return false;
+    }
+
+    private boolean helper(int[] num1,int []num2){
+        for(int i=0;i<26;i++){
+            if(num1[i]!=num2[i])return false; 
+        }return true;
+    }
+}
+
+// ref : https://www.youtube.com/watch?v=3QbafTQaBQk&t=830s
+
+
+// Leetcode 796. Rotate String
+
+Example 1:
+
+Input: s = "abcde", goal = "cdeab"
+Output: true
+Example 2:
+
+Input: s = "abcde", goal = "abced"
+Output: false
+
+
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        return s.length() == goal.length() && (s+s).contains(goal);
+    }
+}
+	
