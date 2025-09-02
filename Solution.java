@@ -687,7 +687,23 @@ public class Main {
     }
 }
 
+
+
 // leetcode 54. Spiral Matrix
+Given an m x n matrix, return all elements of the matrix in spiral order.
+
+Example 1:
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+	
+Example 2:
+Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
+
+
+	
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         int colbegin=0;int colend=matrix[0].length-1;
@@ -718,7 +734,33 @@ class Solution {
     }
 }
 
+
+
+
+
 // leetcode 15 3Sum
+Example 1:
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+Explanation: 
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+Notice that the order of the output and the order of the triplets does not matter.
+	
+Example 2:
+Input: nums = [0,1,1]
+Output: []
+Explanation: The only possible triplet does not sum up to 0.
+	
+Example 3:
+Input: nums = [0,0,0]
+Output: [[0,0,0]]
+Explanation: The only possible triplet sums up to 0.
+
+
+	
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         if(nums == null || nums.length<3)return new ArrayList<>();
@@ -747,7 +789,26 @@ class Solution {
 
 
 // leetcode 228. Summary Ranges
+Example 1:
+Input: nums = [0,1,2,4,5,7]
+Output: ["0->2","4->5","7"]
+Explanation: The ranges are:
+[0,2] --> "0->2"
+[4,5] --> "4->5"
+[7,7] --> "7"
+	
+Example 2:
+Input: nums = [0,2,3,4,6,8,9]
+Output: ["0","2->4","6","8->9"]
+Explanation: The ranges are:
+[0,0] --> "0"
+[2,4] --> "2->4"
+[6,6] --> "6"
+[8,9] --> "8->9"
 
+
+
+	
 class Solution {
     public List<String> summaryRanges(int[] nums) {
         List<String> list = new ArrayList<>();
@@ -770,8 +831,27 @@ class Solution {
     }
 }
 
-// leetcode 143. Reorder List
 
+
+
+// leetcode 143. Reorder List
+You are given the head of a singly linked-list. The list can be represented as:
+
+L0 → L1 → … → Ln - 1 → Ln
+Reorder the list to be on the following form:
+
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+Example 1:
+Input: head = [1,2,3,4]
+Output: [1,4,2,3]
+	
+Example 2:
+Input: head = [1,2,3,4,5]
+Output: [1,5,2,4,3]
+
+	
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -832,7 +912,45 @@ class Solution {
 }
 
 
+
+
 // leetcode 225. Implement Stack using Queues
+
+Implement a last-in-first-out (LIFO) stack using only two queues. 
+The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).
+
+Implement the MyStack class:
+
+void push(int x) Pushes element x to the top of the stack.
+int pop() Removes the element on the top of the stack and returns it.
+int top() Returns the element on the top of the stack.
+boolean empty() Returns true if the stack is empty, false otherwise.
+Notes:
+
+You must use only standard operations of a queue, which means that only push to back, 
+peek/pop from front, size and is empty operations are valid.
+Depending on your language, the queue may not be supported natively. 
+You may simulate a queue using a list or deque (double-ended queue) as long as you use only a queue's standard operations.
+ 
+
+Example 1:
+Input
+["MyStack", "push", "push", "top", "pop", "empty"]
+[[], [1], [2], [], [], []]
+Output
+[null, null, null, 2, 2, false]
+Explanation
+MyStack myStack = new MyStack();
+myStack.push(1);
+myStack.push(2);
+myStack.top(); // return 2
+myStack.pop(); // return 2
+myStack.empty(); // return False
+
+
+
+
+
 class MyStack {
     public Queue<Integer> q;
     public MyStack() {
@@ -870,8 +988,23 @@ class MyStack {
  */
 
 
-// leetcode 19. Remove Nth Node From End of List
 
+
+// leetcode 19. Remove Nth Node From End of List
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+Example 1:
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+	
+Example 2:
+Input: head = [1], n = 1
+Output: []
+	
+Example 3:
+Input: head = [1,2], n = 1
+Output: [1]
+
+	
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -908,8 +1041,19 @@ class Solution {
 }
 
 
-// leetcode 704. Binary Search
 
+// leetcode 704. Binary Search
+Example 1:
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+Explanation: 9 exists in nums and its index is 4
+	
+Example 2:
+Input: nums = [-1,0,3,5,9,12], target = 2
+Output: -1
+Explanation: 2 does not exist in nums so return -1
+
+	
 class Solution {
     public int search(int[] nums, int target) {
         int left=0;int right=nums.length-1;
@@ -928,7 +1072,19 @@ class Solution {
 
 
 // leetcode 35. Search Insert Position
+Example 1:
+Input: nums = [1,3,5,6], target = 5
+Output: 2
+	
+Example 2:
+Input: nums = [1,3,5,6], target = 2
+Output: 1
+	
+Example 3:
+Input: nums = [1,3,5,6], target = 7
+Output: 4
 
+	
 class Solution {
     public int searchInsert(int[] nums, int target) {
         for(int i=0;i<nums.length;i++){
@@ -942,7 +1098,43 @@ class Solution {
 
 
 // leetcode 13. Roman to Integer
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+For example, 2 is written as II in Roman numeral, just two ones added together. 
+12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+
+Roman numerals are usually written largest to smallest from left to right. However, 
+the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is 
+before the five we subtract it making four. The same principle applies to the number nine, 
+which is written as IX. There are six instances where subtraction is used:
+
+I can be placed before V (5) and X (10) to make 4 and 9. 
+X can be placed before L (50) and C (100) to make 40 and 90. 
+C can be placed before D (500) and M (1000) to make 400 and 900.
+Given a roman numeral, convert it to an integer.
+
+Example 1:
+Input: s = "III"
+Output: 3
+Explanation: III = 3.
+	
+Example 2:
+Input: s = "LVIII"
+Output: 58
+Explanation: L = 50, V= 5, III = 3.
+	
+Example 3:
+Input: s = "MCMXCIV"
+Output: 1994
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 // class Solution {
 //     public int romanToInt(String s) {
@@ -1039,6 +1231,25 @@ class Solution {
 
 
 // leetcode 739. Daily Temperatures 
+
+iven an array of integers temperatures represents the daily temperatures, 
+return an array answer such that answer[i] is the number of days you have to 
+wait after the ith day to get a warmer temperature. If there is no future day 
+for which this is possible, keep answer[i] == 0 instead.
+	
+Example 1:
+Input: temperatures = [73,74,75,71,69,72,76,73]
+Output: [1,1,4,2,1,1,0,0]
+	
+Example 2:
+Input: temperatures = [30,40,50,60]
+Output: [1,1,1,0]
+	
+Example 3:
+Input: temperatures = [30,60,90]
+Output: [1,1,0]
+
+	
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
         int []res=new int[temperatures.length];
@@ -1071,7 +1282,21 @@ class Solution {
     }
 }
 
+
+
 // leetcode 82. Remove Duplicates from Sorted List II
+Given the head of a sorted linked list, delete all nodes that have duplicate 
+numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
+
+Example 1:
+Input: head = [1,2,3,3,4,4,5]
+Output: [1,2,5]
+	
+Example 2:
+Input: head = [1,1,1,2,3]
+Output: [2,3]
+
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -1103,8 +1328,23 @@ class Solution {
     }
 }
 
-// leetcode 219. Contains Duplicate II
 
+
+// leetcode 219. Contains Duplicate II
+Example 1:
+Input: nums = [1,2,3,1], k = 3
+Output: true
+	
+Example 2:
+Input: nums = [1,0,1,1], k = 1
+Output: true
+	
+Example 3:
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+
+
+	
 class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         HashMap<Integer,Integer> map=new HashMap<>();
@@ -1126,7 +1366,22 @@ class Solution {
 
 
 // leetcode 509. Fibonacci Number
+Example 1:
+Input: n = 2
+Output: 1
+Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.
+	
+Example 2:
+Input: n = 3
+Output: 2
+Explanation: F(3) = F(2) + F(1) = 1 + 1 = 2.
+	
+Example 3:
+Input: n = 4
+Output: 3
+Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
 
+	
 class Solution {
     public int fib(int n) {
         int a=0;int b=1;
@@ -1140,8 +1395,25 @@ class Solution {
     }
 }
 
-// leetcode 290. Word Pattern
 
+// leetcode 290. Word Pattern
+Example 1:
+Input: pattern = "abba", s = "dog cat cat dog"
+Output: true
+Explanation:
+The bijection can be established as:
+'a' maps to "dog".
+'b' maps to "cat".
+	
+Example 2:
+Input: pattern = "abba", s = "dog cat cat fish"
+Output: false
+	
+Example 3:
+Input: pattern = "aaaa", s = "dog cat cat dog"
+Output: false
+
+	
 class Solution {
     public boolean wordPattern(String pattern, String s) {
         String[] ch=s.split(" ");boolean res=false;
@@ -1337,8 +1609,17 @@ publuc class equilateral{
 
 
 // leetcode 367. Valid Perfect Square
+Example 1:
+Input: num = 16
+Output: true
+Explanation: We return true because 4 * 4 = 16 and 4 is an integer.
+	
+Example 2:
+Input: num = 14
+Output: false
+Explanation: We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.
 
-
+	
 class Solution {
     public boolean isPerfectSquare(int num) {
         double res=Math.sqrt(num);
@@ -1353,7 +1634,24 @@ class Solution {
 
 
 // leetcode 74. Search a 2D Matrix
+You are given an m x n integer matrix matrix with the following two properties:
 
+Each row is sorted in non-decreasing order.
+The first integer of each row is greater than the last integer of the previous row.
+Given an integer target, return true if target is in matrix or false otherwise.
+You must write a solution in O(log(m * n)) time complexity. 
+
+Example 1:
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
+	
+Example 2:
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+Output: false
+
+
+
+	
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int col=matrix[0].length -1;
@@ -1375,7 +1673,22 @@ class Solution {
 
 
 // leetcode 153. Find Minimum in Rotated Sorted Array
+Example 1:
+Input: nums = [3,4,5,1,2]
+Output: 1
+Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+	
+Example 2:
+Input: nums = [4,5,6,7,0,1,2]
+Output: 0
+Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.
+	
+Example 3:
+Input: nums = [11,13,15,17]
+Output: 11
+Explanation: The original array was [11,13,15,17] and it was rotated 4 times. 
 
+	
 class Solution {
     public int findMin(int[] nums) {
         int left=0;
@@ -1396,7 +1709,19 @@ class Solution {
 
 
 // leetcode 33. Search in Rotated Sorted Array
+Example 1:
+Input: nums = [4,5,6,7,0,1,2], target = 0
+Output: 4
+	
+Example 2:
+Input: nums = [4,5,6,7,0,1,2], target = 3
+Output: -1
+	
+Example 3:
+Input: nums = [1], target = 0
+Output: -1
 
+	
 class Solution {
     public int search(int[] nums, int target) {
         // for(int i=0; i<nums.length;i++){
@@ -1435,7 +1760,27 @@ class Solution {
 
 
 // leetcode 875. Koko Eating Bananas
+Koko loves to eat bananas. There are n piles of bananas, the ith pile has 
+piles[i] bananas. The guards have gone and will come back in h hours.
+Koko can decide her bananas-per-hour eating speed of k. Each hour, she chooses 
+some pile of bananas and eats k bananas from that pile. If the pile has less 
+than k bananas, she eats all of them instead and will not eat any more bananas during this hour.
+Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.
+Return the minimum integer k such that she can eat all the bananas within h hours.
 
+Example 1:
+Input: piles = [3,6,7,11], h = 8
+Output: 4
+	
+Example 2:
+Input: piles = [30,11,23,4,20], h = 5
+Output: 30
+	
+Example 3:
+Input: piles = [30,11,23,4,20], h = 6
+Output: 23
+
+	
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         int left = 1;
@@ -1466,7 +1811,19 @@ class Solution {
 
 
 // Leetcode 1004. Max Consecutive Ones III
+Example 1:
+Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+Output: 6
+Explanation: [1,1,1,0,0,1,1,1,1,1,1]
+Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
+	
+Example 2:
+Input: nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3
+Output: 10
+Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
+Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
 
+	
 class Solution {
     public int longestOnes(int[] nums, int k) {
         int zerocount= 0;
@@ -1487,7 +1844,17 @@ class Solution {
 
 
 // Leetcode 152. Maximum Product Subarray
+Example 1:
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+	
+Example 2:
+Input: nums = [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 
+	
 // Java implementation
 class Solution {
     public int maxProduct(int[] nums) {
@@ -1514,7 +1881,22 @@ class Solution {
 
 
 // Leetcode 733. Flood Fill
+Example 1:
+Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
+Output: [[2,2,2],[2,2,0],[2,0,1]]
+Explanation:
+From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), 
+all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) 
+are colored with the new color.
+Note the bottom corner is not colored 2, because it is not horizontally or vertically connected to the starting pixel.
 
+Example 2:
+Input: image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0
+Output: [[0,0,0],[0,0,0]]
+Explanation:
+The starting pixel is already colored with 0, which is the same as the target color. Therefore, no changes are made to the image.
+
+	
 // Runtime: 1 ms, faster than 90.98% of Java online submissions for Flood Fill.
 // Time Complexity : O(n*m)
 // Space Complexity : O(n*m)
@@ -1543,8 +1925,22 @@ class Solution {
 }
 
 
-// Leetcode 463. Island Perimeter 
 
+// Leetcode 463. Island Perimeter 
+Example 1:
+Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+Output: 16
+Explanation: The perimeter is the 16 yellow stripes in the image above.
+	
+Example 2:
+Input: grid = [[1]]
+Output: 4
+	
+Example 3:
+Input: grid = [[1,0]]
+Output: 4
+
+	
 class Solution {
     public int islandPerimeter(int[][] grid) {
         int rows=grid.length;
@@ -1566,7 +1962,22 @@ class Solution {
 
 // leetcode 438. Find All Anagrams in a String
 
+Example 1:
+Input: s = "cbaebabacd", p = "abc"
+Output: [0,6]
+Explanation:
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+	
+Example 2:
+Input: s = "abab", p = "ab"
+Output: [0,1,2]
+Explanation:
+The substring with start index = 0 is "ab", which is an anagram of "ab".
+The substring with start index = 1 is "ba", which is an anagram of "ab".
+The substring with start index = 2 is "ab", which is an anagram of "ab".
 
+	
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> list=new ArrayList<>();
@@ -1588,7 +1999,27 @@ class Solution {
 }
 
 
+
+
 // leetcode 155. Min Stack
+Example 1:
+Input
+["MinStack","push","push","push","getMin","pop","top","getMin"]
+[[],[-2],[0],[-3],[],[],[],[]]
+Output
+[null,null,null,null,-3,null,0,-2]
+Explanation
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin(); // return -3
+minStack.pop();
+minStack.top();    // return 0
+minStack.getMin(); // return -2
+
+
+
 
 class MinStack {
     Stack<Integer> stack;
@@ -1637,8 +2068,34 @@ class MinStack {
  */
 
 
-// leetcode 150. Evaluate Reverse Polish Notation
 
+
+
+// leetcode 150. Evaluate Reverse Polish Notation
+Example 1:
+Input: tokens = ["2","1","+","3","*"]
+Output: 9
+Explanation: ((2 + 1) * 3) = 9
+	
+Example 2:
+Input: tokens = ["4","13","5","/","+"]
+Output: 6
+Explanation: (4 + (13 / 5)) = 6
+	
+Example 3:
+Input: tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+Output: 22
+Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+= ((10 * (6 / (12 * -11))) + 17) + 5
+= ((10 * (6 / -132)) + 17) + 5
+= ((10 * 0) + 17) + 5
+= (0 + 17) + 5
+= 17 + 5
+= 22
+
+
+
+	
 class Solution {
     Stack<Integer> stack=new Stack<>();
 
@@ -1698,7 +2155,21 @@ class Solution {
 
 
 // leetcode 424. Longest Repeating Character Replacement
+Example 1:
+Input: s = "ABAB", k = 2
+Output: 4
+Explanation: Replace the two 'A's with two 'B's or vice versa.
+	
+Example 2:
+Input: s = "AABABBA", k = 1
+Output: 4
+Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
+The substring "BBBB" has the longest repeating letters, which is 4.
+There may exists other ways to achieve this answer too.
 
+
+
+	
 class Solution {
     public int characterReplacement(String s, int k) {
         int[] freq=new int[26];
@@ -1722,7 +2193,14 @@ class Solution {
 
 
 // leetcode 61. Rotate List
-
+Example 1:
+Input: head = [1,2,3,4,5], k = 2
+Output: [4,5,1,2,3]
+	
+Example 2:
+Input: head = [0,1,2], k = 4
+Output: [2,0,1]
+	
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -1761,8 +2239,18 @@ class Solution {
 
 
 // leetcode 109. Convert Sorted List to Binary Search Tree
+Example 1:
+Input: head = [-10,-3,0,5,9]
+Output: [0,-3,9,-10,null,5]
+Explanation: One possible answer is [0,-3,9,-10,null,5], which represents the shown height balanced BST.
+	
+Example 2:
+Input: head = []
+Output: []
 
+///////////////////////////////////////////////////////////////////////
 
+	
 	case 1:
 Input: head = [-10,-3,0,5,9]
 Output: [0,-3,9,-10,null,5]
@@ -1817,7 +2305,25 @@ class Solution {
 
 
 // leetcode 3. Longest Substring Without Repeating Characters
+Example 1:
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+	
+Example 2:
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+	
+Example 3:
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
+
+
+	
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int max = 0;
@@ -1842,8 +2348,32 @@ class Solution {
     }
 }
 
-// leetcode 88. Merge Sorted Array
 
+
+
+
+// leetcode 88. Merge Sorted Array
+Example 1:
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+	
+Example 2:
+Input: nums1 = [1], m = 1, nums2 = [], n = 0
+Output: [1]
+Explanation: The arrays we are merging are [1] and [].
+The result of the merge is [1].
+	
+Example 3:
+Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+Output: [1]
+Explanation: The arrays we are merging are [] and [1].
+The result of the merge is [1].
+Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
+
+
+	
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int []arr=new int[m+n];
@@ -1885,8 +2415,26 @@ class Solution {
 
  */
 
-// leetcode 189. Rotate Array
 
+
+
+// leetcode 189. Rotate Array
+Example 1:
+Input: nums = [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+	
+Example 2:
+Input: nums = [-1,-100,3,99], k = 2
+Output: [3,99,-1,-100]
+Explanation: 
+rotate 1 steps to the right: [99,-1,-100,3]
+rotate 2 steps to the right: [3,99,-1,-100]
+
+	
 class Solution {
     public void rotate(int[] nums, int k) {
 ////////////////////////////////////////////////////////
@@ -1928,7 +2476,16 @@ class Solution {
 }
 
 // leetcode 5. Longest Palindromic Substring
+Example 1:
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+	
+Example 2:
+Input: s = "cbbd"
+Output: "bb"
 
+	
 public class Solution {
     public String longestPalindrome(String s) {
         if(s.length()<=1)return s;
@@ -1995,6 +2552,23 @@ public class Solution {
 
 // leetcode 1456. Maximum Number of Vowels in a Substring of Given Length
 
+
+Example 1:
+Input: s = "abciiidef", k = 3
+Output: 3
+Explanation: The substring "iii" contains 3 vowel letters.
+	
+Example 2:
+Input: s = "aeiou", k = 2
+Output: 2
+Explanation: Any substring of length 2 contains 2 vowels.
+	
+Example 3:
+Input: s = "leetcode", k = 3
+Output: 2
+Explanation: "lee", "eet" and "ode" contain 2 vowels.
+
+	
 class Solution {
     public int maxVowels(String s, int k) {
         int window =0;int maxcount=0;
@@ -2021,6 +2595,25 @@ class Solution {
 
 
 // leetcode 24. Swap Nodes in Pairs
+
+
+Example 1:
+Input: head = [1,2,3,4]
+Output: [2,1,4,3]
+
+
+Example 2:
+Input: head = []
+Output: []
+
+Example 3:
+Input: head = [1]
+Output: [1]
+	
+Example 4:
+Input: head = [1,2,3]
+Output: [2,1,3]
+
 
 /**
  * Definition for singly-linked list.
@@ -2064,8 +2657,25 @@ class Solution {
 }
 
 
+
+
 // leetcode 387. First Unique Character in a String
 
+Example 1:
+Input: s = "leetcode"
+Output: 0
+Explanation:
+The character 'l' at index 0 is the first character that does not occur at any other index.
+	
+Example 2:
+Input: s = "loveleetcode"
+Output: 2
+	
+Example 3:
+Input: s = "aabb"
+Output: -1
+
+	
 class Solution {
     public int firstUniqChar(String s) {
         Map<Character,Integer> map=new HashMap<>();
@@ -2127,6 +2737,18 @@ public class Main
 
 
 /*
+leetcode 54. Spiral Matrix
+Example 1:
+
+
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+Example 2:
+
+
+Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
 Write the code to traverse a matrix in a spiral format.
 Sample Input:
 
@@ -2475,8 +3097,27 @@ public class Main
 	}
 }
 
-// Leetcode 53. Maximum Subarray
 
+
+
+// Leetcode 53. Maximum Subarray
+Example 1:
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+	
+Example 2:
+Input: nums = [1]
+Output: 1
+Explanation: The subarray [1] has the largest sum 1.
+	
+Example 3:
+Input: nums = [5,4,-1,7,8]
+Output: 23
+Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+
+
+	
 class Solution {
     public int maxSubArray(int[] nums) {
         int maxSum = Integer.MIN_VALUE;
@@ -2496,6 +3137,17 @@ class Solution {
 
  
 // Leetcode 350. Intersection of Two Arrays II
+
+Example 1:
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2,2]
+	
+Example 2:
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [4,9]
+Explanation: [9,4] is also accepted.
+
+	
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         // ArrayList<Integer> list=new ArrayList<>();
@@ -2549,7 +3201,16 @@ class Solution {
 
 
 // Leetcode 349. Intersection of Two Arrays
+Example 1:
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+	
+Example 2:
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [9,4]
+Explanation: [4,9] is also accepted.
 
+	
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         // int l1=nums1.length;
@@ -2608,6 +3269,23 @@ class Solution {
 
 // Leetcode 125 Valid Palindrome
 
+Example 1:
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+	
+Example 2:
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+	
+Example 3:
+Input: s = " "
+Output: true
+Explanation: s is an empty string "" after removing non-alphanumeric characters.
+Since an empty string reads the same forward and backward, it is a palindrome.
+
+	
 class Solution {
     public boolean isPalindrome(String s) {
         int i=0;
